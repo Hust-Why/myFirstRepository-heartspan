@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>小不拉的爱心照</title>
+	<style type="text/css">
+		body{
+			background: black;
+			/*perspective: 1000px;*/
+		}	
+		/*心  部分*/
+		#heart{
+			position:relative;
+			width: 200px;
+			height: 320px;
+			margin: 320px auto;
+			transform-style: preserve-3d;
+			/*CSS3动画：动画名称 执行时间 匀速运动 无限重复*/
+			animation: rot 10s linear infinite;
+		}
+		@keyframes rot{
+			from{transform: rotateY(0deg)rotateX(0deg);}
+			to{transform: rotateY(360deg)rotateX(360deg);}
+		}
+		#heart .heart{
+			position: absolute;
+			left: 0;
+			top:0;
+			width: 200px;
+			height: 320px;
+			border: 2px solid red;
+			border-left: 0;  /*低版本的IE不支持none  用0*/
+			border-bottom: 0;
+			/*顺时针  左上 右上 右下 坐下 斜杠前为水平 后为竖直边*/
+			border-radius: 50% 50% 0/50% 40% 0;
+		}
+
+
+		/*正方体  部分*/
+		#cube{
+			position: relative;		/*相对定位，用它做参考物*/
+			width:100px;
+			height: 100px;
+			transform-style: preserve-3d;
+			/*transition:2s ease-in-out;	动画过度，两秒完成,渐入渐出
+		transform-origin:50% 50% -101px;/*调整旋转中心 第一个50%相对于同级下的宽度来算，第二个50%相对于同级下的height来算 -101px值Z轴向里（z轴没有参考值，没法用百分比）*/
+
+		transform:translateX(50px)translateY(110px)translateZ(50px);
+		}
+		#cube div{
+			position: absolute;		/*相对于relative的绝对定位*/
+			top:0;				/*相对于relative上端为0*/
+			left:0;				/*相对于relative左端为0*/
+			width:100px;
+			height: 100px;
+			/*border: 2px solid red;*/
+		}
+		#cube div:nth-child(1){
+			top:-100px;		   /*上为y负方向  202px，含有2px的border*/
+			/*transform-origin: 50% 50% 0; 默认旋转中心x(宽度width)的一半：100px  y(高度height)的一半：100px  z就在电脑平面上*/
+			transform-origin:bottom;  /*改旋转中心围绕下面的边转*/
+			transform: rotateX(90deg);
+		} 
+		#cube div:nth-child(2){
+			top:100px;		   /*下为y正方向  202px，含有2px的border*/
+			transform-origin:top;
+			transform: rotateX(-90deg);
+		}
+		#cube div:nth-child(3){
+			left:-100px;	 /*左  x负*/
+			transform-origin:right;
+			transform: rotateY(-90deg);
+		}
+		#cube div:nth-child(4){
+			left:100px;		 /*右  x正*/
+			transform-origin:left;
+			transform: rotateY(90deg);
+		}
+		#cube div:nth-child(5){
+		}
+		#cube div:nth-child(6){
+			 /*向Z轴方向平移*/
+			transform: translateZ(-100px);
+		}
+/*		#cube:hover{
+			transform:rotateY(360deg);
+		}*/
+		#cube div img{
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+
+	<script type="text/javascript">
+		window.onload = function () {
+			var oHeart = document.getElementById("heart");
+			for (var i = 0; i < 36; i++) {
+				var oDiv = document.createElement("div");
+				oDiv.className = "heart";	
+				oDiv.style.transform = "rotateY("+i*10+"deg)rotateZ(45deg)translateX(62px)";
+				oHeart.appendChild(oDiv);
+			}
+			var oPhoto1 = document.getElementById("photo1")
+
+		}
+	</script>
+</head>
+<body>
+	<div id="heart">
+		<div id="cube">	<!--cube立方体-->
+			<div id="photo1"><img src="image/1.jpg"></div>
+			<div id="photo2"><img src="image/2.jpg"></div>
+			<div id="photo3"><img src="image/3.jpg"></div>
+			<div id="photo4"><img src="image/4.jpg"></div>
+			<div id="photo5"><img src="image/5.jpg"></div>
+			<div id="photo6"><img src="image/6.jpg"></div>
+	 	</div>	 
+	</div>
+</body>
+</html>

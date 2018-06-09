@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		body{
+			perspective: 1000px;	/*视角 想看到整个结构 放在父元素上*/ 
+		}
+		#cube{
+			position: relative;		/*相对定位，用它做参考物*/
+			width:200px;
+			height: 200px;
+			margin:300px auto;
+			transform-style: preserve-3d;
+			transition:2s ease-in-out;	/*动画过度，两秒完成,渐入渐出*/
+		transform-origin:50% 50% -101px;/*调整旋转中心 第一个50%相对于同级下的宽度来算，第二个50%相对于同级下的height来算 -101px值Z轴向里（z轴没有参考值，没法用百分比）*/
+		}
+		#cube div{
+			position: absolute;		/*相对于relative的绝对定位*/
+			top:0;				/*相对于relative上端为0*/
+			left:0;				/*相对于relative左端为0*/
+			width:200px;
+			height: 200px;
+			border: 2px solid red;
+		}
+		#cube div:nth-child(1){
+			top:-202px;		   /*上为y负方向  202px，含有2px的border*/
+			/*transform-origin: 50% 50% 0; 默认旋转中心x(宽度width)的一半：100px  y(高度height)的一半：100px  z就在电脑平面上*/
+			transform-origin:bottom;  /*改旋转中心围绕下面的边转*/
+			transform: rotateX(90deg);
+		} 
+		#cube div:nth-child(2){
+			top:202px;		   /*下为y正方向  202px，含有2px的border*/
+			transform-origin:top;
+			transform: rotateX(-90deg);
+		}
+		#cube div:nth-child(3){
+			left:-202px;	 /*左  x负*/
+			transform-origin:right;
+			transform: rotateY(-90deg);
+		}
+		#cube div:nth-child(4){
+			left:202px;		 /*右  x正*/
+			transform-origin:left;
+			transform: rotateY(90deg);
+		}
+		#cube div:nth-child(5){
+		}
+		#cube div:nth-child(6){
+			 /*向Z轴方向平移*/
+			transform: translateZ(-202px);
+		}
+		#cube:hover{
+			transform:rotateY(360deg);
+		}
+	</style>
+</head>
+<body>
+	 <div id="cube">	<!--cube立方体-->
+		<div>上</div>
+		<div>下</div>
+		<div>左</div>
+		<div>右</div>
+		<div>前</div>
+		<div>后</div>
+	 </div>	 
+</body>
+</html>
